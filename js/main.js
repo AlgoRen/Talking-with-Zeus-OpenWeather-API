@@ -14,6 +14,7 @@ function loadWeather() {
     console.log(search.main.temp)
     console.log(search.main.humidity)
     console.log(search.wind.speed)
+    
     var cityName = $("<h2>").text(search.name)
     $("#currentWeather").append(cityName);
     var currentTemp = $("<h3>").text("Tempature: " + Math.round(search.main.temp) + "F")
@@ -29,8 +30,8 @@ function loadWeather() {
 
 
 function addButton() {
-    var acorns = $("<Button>").text("Acorns")
-    $("#buttonArea").append(acorns)
+    var cityButton = $("<Button>").text(this.search.name)
+    $("#buttonArea").append(cityButton)
 }
 
 function loadResults() {
@@ -49,7 +50,7 @@ $("#searchCity").on("click", function (e) {
     var APICall = "http://api.openweathermap.org/data/2.5/weather?q="
     var APIkey = "&APPID=11f39808453d026eda60eff244a8ef1e"
     var city = $("#inputCity").val()
-
+    
     // Preventing duplicate searches.
     for (var i = 0; i < savingCities.length; i++) {
         if (city.toLowerCase() == savingCities[i].toLowerCase()){
@@ -57,6 +58,7 @@ $("#searchCity").on("click", function (e) {
             return;
         }
     }
+    
     var queryURL = APICall+city+APIkey+"&units=imperial"
     console.log(queryURL)
     $.ajax({
@@ -64,9 +66,12 @@ $("#searchCity").on("click", function (e) {
         method: "GET"
     }).then(function(response){
         search = response;
+        addButton(this)
         savingCities.push(city);
         localStorage.setItem("cities", JSON.stringify(savingCities));
         loadWeather();
+        console.log(savingCities)
+        console.log("---------------------")
         console.log("Longitude: " + long)
         console.log("Latitude: " + lat)
         // API CALL for UV
@@ -82,6 +87,6 @@ $("#searchCity").on("click", function (e) {
         })
     })
     // Adding buttons onto page.
-    addButton();
+    // addButton();
     // End of SearchCity on click function.
 });
