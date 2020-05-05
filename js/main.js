@@ -14,15 +14,24 @@ function loadWeather() {
     console.log(search.main.temp)
     console.log(search.main.humidity)
     console.log(search.wind.speed)
-    
+    console.log(search.weather[0].icon)
 
-    var cityName = $("<h2>").text(search.name)
+    var iconImage = "http://openweathermap.org/img/wn/"+search.weather[0].icon+".png"
+
+    var cityName = $("<h2>").text(search.name).attr("class", "col-md-5");
     $("#currentWeather").append(cityName);
+    var dateArea = $("<h2>").text("Date will go here.").attr("class", "col-md-5");
+    $("#currentWeather").append(dateArea);
+    var weatherIcon = $("<img>").attr("src", iconImage).attr("class", "col-md-2")
+    $("#currentWeather").append(weatherIcon);
     var currentTemp = $("<h3>").text("Tempature: " + Math.round(search.main.temp) + "F")
+    .attr("class", "col-md-6")
     $("#currentWeather").append(currentTemp);
     var currentHumidity = $("<h3>").text("Humidity: " + Math.round(search.main.humidity) + "%")
+    .attr("class", "col-md-6")
     $("#currentWeather").append(currentHumidity);
     var currentWindSpeed = $("<h3>").text("Wind speed: " + Math.round(search.wind.speed) + "MPH")
+    .attr("class", "col-md-6")
     $("#currentWeather").append(currentWindSpeed);
 
     
@@ -95,8 +104,8 @@ function weatherCall(e) {
             url: APICallUV,
             method: "GET"
         }).then(function(response){
-            UVIndex = response.value
-            var UV = $("<h3>").text("UV Index: " + UVIndex)
+            UVIndex = response.value //Setting UV response to variable and appending to page.
+            var UV = $("<h3>").text("UV Index: " + UVIndex).attr("class", "col-md-6")
             $("#currentWeather").append(UV);
         })
     })
