@@ -5,9 +5,9 @@ var search;
 var savingCities = [];
 var cities = JSON.parse(localStorage.getItem("cities")) || [];
 // Getting info needed for UV index
-var long
-var lat
-var APICallUV
+var long;
+var lat;
+var APICallUV;
 
 function loadWeather() {
     console.log(search);
@@ -40,46 +40,65 @@ function loadWeather() {
     return long, lat;
 }
 
-
 function addButton() {
+    // $("#buttonArea").empty()
     var cityButton = $("<Button>").text(this.search.name).attr("class", "cityButton")
     $("#buttonArea").append(cityButton)
     
 }
 
-function loadResults(e) {
+for (i = 0; i < cities.length; i++){
+    var cityButton = $("<Button>").text(cities[i]).attr("class", "cityButton");
+    $("#buttonArea").append(cityButton);
+}
+
+function loadResults() {
     // e.preventDefault()
     // How can I get the callback from OpenWeather API from button click?
     // Read the button value and put it into city 
-    var city = this.innerText
+    // $("#buttonArea").childNode[0]
+    console.log(searchCity)
+    var city = $("#inputCity").val()
+    if (city == "") {
+        return "Tokyo"
+    } else {
+        return city;
+    }
     // Trying to figure out how to load weather results for the city that corresponds to the button clicked.
-    loadWeather();
+   
 }
 
-function saveResults() {
-
-}
+// function savedResults() {
+//     var cityButton = $("<Button>").text(cities[0]).attr("class", "cityButton")
+//     $("#buttonArea").append(cityButton)
+// }
 
     
 // Getting input from search field and getting callback from OpenWeather API.
 $("#searchCity").on("click", weatherCall);
-$(document).on("click", ".cityButton", loadResults);
+// $(".cityButton").on("click", weatherCall)
+$(document).on("click", ".cityButton", function(){
+    console.log(this.innerText)
+    searchCity = this.innerText
+    return searchCity
+});
 
-function weatherCall(e) {
+
+function weatherCall() {
     // e.preventDefault()
     // API CALL for Weather
     var APICall = "http://api.openweathermap.org/data/2.5/weather?q="
     var APIkey = "&APPID=11f39808453d026eda60eff244a8ef1e"
-    var city = $("#inputCity").val()
-    
+    console.log(cities)
+    // var city = $("#inputCity").val()
+    var city = loadResults(this)
+    console.log(searchCity)
     // Preventing duplicate searches.
     for (var i = 0; i < savingCities.length; i++) {
         if (city.toLowerCase() == savingCities[i].toLowerCase()){
-            console.log("That exists!")
             return;
         }
     }
-    
     var queryURL = APICall+city+APIkey+"&units=imperial"
     console.log(queryURL)
     $.ajax({
@@ -92,7 +111,7 @@ function weatherCall(e) {
         localStorage.setItem("cities", JSON.stringify(savingCities));
         $("#currentWeather").empty();
         loadWeather();
-        
+        console.log(city)
         console.log(savingCities)
         console.log("---------------------")
         console.log("Longitude: " + long)
