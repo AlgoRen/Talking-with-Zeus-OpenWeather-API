@@ -1,0 +1,31 @@
+{
+  "name": "develop",
+  "version": "1.0.0",
+  "description": "For developing Zeus Weather App.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/AlgoRen/Talking-with-Zeus-OpenWeather-API.git"
+  },
+  "keywords": [
+    "Weather",
+    "App",
+    "For",
+    "Skaters",
+    "Using",
+    "OpenWeather",
+    "API"
+  ],
+  "author": "Ren",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlgoRen/Talking-with-Zeus-OpenWeather-API/issues"
+  },
+  "homepage": "https://github.com/AlgoRen/Talking-with-Zeus-OpenWeather-API#readme",
+  "dependencies": {
+    "lodash": "^4.17.15"
+  }
+}
