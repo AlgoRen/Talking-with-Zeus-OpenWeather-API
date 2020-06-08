@@ -20,6 +20,7 @@ class General_Weather {
         // Get name of city.
             // Takes in id number and returns a string name.
             // Can be used to load city name into button.
+            // Is used for local storage.
             // Is used to display name information to page.
         return this.id;
     }

@@ -46,3 +46,56 @@
         // Making API call for today's general weather conditions.
 
 
+// Main.js is purpose is to work with the front end of Zeus App.
+
+// Getting input from search field and button click getting callback from OpenWeather API.
+var searchButton = document.querySelector("#searchCity");
+var cityButton = document.querySelectorAll(".cityButton");
+var buttonArea = document.querySelector("#buttonArea");
+var city = "";
+var cityFromButton = "";
+var cityFromSearch = "";
+var newCitySearches = ['is it loggin this?'];
+
+$("#searchCity").on("click", weatherCall);
+// $("#buttonArea").on("click", weatherCall);
+// Function for searching cities with OpenWeather API
+function weatherCall(event) {
+    event.preventDefault();
+    const self = this;
+    cityFromSearch = getCityNameFromSearchBox(self);
+    newCitySearches.push(cityFromSearch);
+    setTimeout(() => {
+        checkarray();
+    }, 10000);
+}
+
+// Function that gets city name from search box.
+function getCityNameFromSearchBox(self) {
+    return self.parentNode.parentNode.children[0].value;
+}
+
+// Function that gets the buttons from the button area and adds onclick event.
+function getCityButtons() {
+    var areabuttons = document.getElementById('buttonArea').getElementsByTagName('button');
+    for (var i = 0, j = areabuttons.length; i < j; i++) { // Incrementing through DOM.
+      areabuttons[i].onclick = getCityButtonValues; // Calling function to get value.
+    }
+}
+
+// Function that gets the button's text value
+function getCityButtonValues() {
+    city = $(this).data().value;
+    newCitySearches.push(city);
+    return;
+}
+cityFromButton = getCityButtonValues();
+// Loads an array of the pages buttons and adds onclick events to them. Gets 
+// each buttons text value using the 'this' keyword to get the corresponding value
+// of the button that is clicked.
+window.onload = getCityButtons;
+
+const checkarray = () => {
+    console.log(newCitySearches);
+}
+

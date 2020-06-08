@@ -2,7 +2,7 @@ const General_Weather = require('./General_Weather');
 
 
 class Skater_Weather extends General_Weather {
-    constructor(tempature, humidity, windspeed, precipitation, clouds) {
+    constructor(id, date, uvIndex, tempature, humidity, windspeed, precipitation, clouds) {
         super(id, date, uvIndex, tempature, humidity, windspeed);
         this.precipitation = precipitation;
         this.clouds = clouds;
