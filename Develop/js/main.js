@@ -44,4 +44,5 @@
 // The data will be modularized in this form:
         // Getting positional data based on input, will be used for both pages.
         // Making API call for today's general weather conditions.
-    
+
+
