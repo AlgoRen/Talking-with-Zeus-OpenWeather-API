@@ -26,6 +26,6 @@
   },
   "homepage": "https://github.com/AlgoRen/Talking-with-Zeus-OpenWeather-API#readme",
   "dependencies": {
-    "lodash": "^4.17.19"
+    "lodash": "^4.17.21"
   }
 }
